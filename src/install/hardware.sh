@@ -9,11 +9,6 @@ echo "##########################################################################
 if [[ -f /boot/config.txt ]]; then
     echo "configuring pi hardware..."
     
-    systemctl disable getty@.service
-    systemctl disable bluetooth.service
-    systemctl disable sound.target
-    systemctl disable bthelper.service
-    systemctl disable nfs-client.target
     systemctl disable remote-fs.target
 
 

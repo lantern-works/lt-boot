@@ -9,7 +9,7 @@ fi
 ssid=$1
 pwd=$2
 
-if [[ !ssid || !pwd ]]; then
+if [[ -e ssid || -e pwd ]]; then
 	echo "missing required wifi ssid or password"
 	exit
 fi
