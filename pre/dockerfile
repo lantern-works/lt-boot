@@ -1,0 +1,2 @@
+from stephank/archlinux:armv6-base
+ENTRYPOINT /opt/install.sh

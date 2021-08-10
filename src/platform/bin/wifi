@@ -1,0 +1,45 @@
+#!/bin/bash
+
+if [[ $UID != 0 ]]; then
+    echo "Please run this script with sudo:"
+    echo "sudo $0 $*"
+    exit 1
+fi
+
+ssid=$1
+pwd=$2
+
+if [[ !ssid || !pwd ]]; then
+	echo "missing required wifi ssid or password"
+	exit
+fi
+
+echo "registering network: ${ssid}"
+echo "encrypting wifi pass..."
+key=`wpa_passphrase ${ssid} <<< ${pwd} | grep -oE '(psk=)[a-zA-Z0-9]*$' | tr -d 'psk='`
+
+echo "creating profile..."
+if [[ -f /etc/netctl/lt ]]; then
+	rm /etc/netctl/lt > /dev/null
+fi
+touch /etc/netctl/lt
+
+cat <<EOF > `/etc/netctl/lt`
+Description="lt"
+Interface=wlan0
+Connection=wireless
+Security=wpa
+ESSID="${ssid}"
+IP=dhcp
+Key="${key}"
+EOF
+
+
+
+if [[ ! -f /etc/netctl/lt ]]; then
+	echo "missing expected profile"
+	exit
+else
+	echo "profile created"
+	netctl start lt
+fi

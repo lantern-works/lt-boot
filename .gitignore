@@ -1,0 +1,6 @@
+*.tar.gz
+*.tar.xz
+*.pkg.tar.xz.sig
+*.part
+*.img
+.DS_Store
