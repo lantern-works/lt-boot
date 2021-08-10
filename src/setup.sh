@@ -8,8 +8,9 @@ echo "---------------------------------------------"
 
 ls -al /
 if [[ -f /boot/config.txt ]]; then
-    /tmp/install/hardware.sh # hardware and networking
-    /tmp/install/software.sh # software pre-requisites
+    /tmp/install/hardware.sh # hardware core setuo
+    /tmp/install/network.sh # networking core setup
+    /tmp/install/environment.sh # environment core setup
     echo "---------------------------------------------"
     echo " Success with configuration"
     echo "---------------------------------------------"

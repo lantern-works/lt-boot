@@ -9,7 +9,8 @@ COPY pre/pkg/ /var/lib/pacman/sync/
 RUN mkdir -p /tmp/install
 COPY src/install/*.sh /tmp/install/
 RUN /tmp/install/hardware.sh
-RUN /tmp/install/software.sh
+RUN /tmp/install/network.sh
+RUN /tmp/install/environment.sh
 
 
 # platform install
